@@ -1,4 +1,4 @@
-package liuliu.learning.db.config;
+package liuliu.learning.intercepter;
 
 import java.util.Properties;
 

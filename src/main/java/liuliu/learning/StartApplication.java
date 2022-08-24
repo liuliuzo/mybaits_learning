@@ -1,4 +1,4 @@
-package liuliu.learning.db;
+package liuliu.learning;
 
 import java.util.List;
 

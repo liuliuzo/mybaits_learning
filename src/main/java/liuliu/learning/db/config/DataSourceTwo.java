@@ -1,5 +1,8 @@
 package liuliu.learning.db.config;
 
-public class DataSourceTwo {
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
+public class DataSourceTwo {
+    
 }
