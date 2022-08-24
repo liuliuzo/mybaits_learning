@@ -68,16 +68,16 @@ public class SecondIntercepter implements Interceptor {
         }
 
         log.info("result:{}", result.toString());
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public Object plugin(Object target) {
-		return (target instanceof Executor) ? Plugin.wrap(target, this) : target;
-	}
+    @Override
+    public Object plugin(Object target) {
+        return (target instanceof Executor) ? Plugin.wrap(target, this) : target;
+    }
 
-	@Override
-	public void setProperties(Properties properties) {
-		log.info("properties:{}", properties.toString());
-	}
+    @Override
+    public void setProperties(Properties properties) {
+        log.info("properties:{}", properties.toString());
+    }
 }

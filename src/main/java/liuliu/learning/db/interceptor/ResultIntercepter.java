@@ -25,30 +25,30 @@ import org.slf4j.LoggerFactory;
 })
 public class ResultIntercepter implements Interceptor {
 
-	private static final Logger log = LoggerFactory.getLogger(ResultIntercepter.class);
+    private static final Logger log = LoggerFactory.getLogger(ResultIntercepter.class);
 
-	@Override
-	public Object intercept(Invocation invocation) throws Throwable {
-		Statement statement = (Statement) invocation.getArgs()[0];
-		ResultSet resultSet = statement.getResultSet();
-		while(resultSet.next()) {
-			String name = resultSet.getString("name");
-			log.info("name:{}", name);
-			if(!name.equals("checksum")){
-				//throw new RuntimeException(new MyException("checksum fail", name));
-			}
-		}
-		log.info("resultSet:{}", resultSet.toString());
-		return invocation.proceed();
-	}
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+        Statement statement = (Statement) invocation.getArgs()[0];
+        ResultSet resultSet = statement.getResultSet();
+        while(resultSet.next()) {
+            String name = resultSet.getString("name");
+            log.info("name:{}", name);
+            if(!name.equals("checksum")){
+                //throw new RuntimeException(new MyException("checksum fail", name));
+            }
+        }
+        log.info("resultSet:{}", resultSet.toString());
+        return invocation.proceed();
+    }
 
-	@Override
-	public Object plugin(Object target) {
-		return (target instanceof ResultSetHandler) ? Plugin.wrap(target, this) : target;
-	}
+    @Override
+    public Object plugin(Object target) {
+        return (target instanceof ResultSetHandler) ? Plugin.wrap(target, this) : target;
+    }
 
-	@Override
-	public void setProperties(Properties properties) {
-		log.info("properties:{}", properties.toString());
-	}
+    @Override
+    public void setProperties(Properties properties) {
+        log.info("properties:{}", properties.toString());
+    }
 }

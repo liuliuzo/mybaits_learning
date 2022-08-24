@@ -84,7 +84,6 @@ public class DataSourceOneConfig implements InitializingBean {
     }
 
     @Bean
-    @ConditionalOnMissingBean
     public SqlSessionFactory sqlSessionFactoryOne(@Qualifier("dataSourceOne") DataSource dataSource) throws Exception {
       SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
       factory.setDataSource(dataSource);

@@ -12,7 +12,7 @@ import liuliu.learning.db.entity.UserInfo;
  * @since JDK 1.8
  */
 public interface UserInfoMapperOne {
-	
+    
     List<UserInfo> listAll();
 
     int insert(UserInfo userInfo);
