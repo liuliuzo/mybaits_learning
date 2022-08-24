@@ -1,4 +1,4 @@
-package liuliu.learning.db.dao;
+package liuliu.learning.db.dao.one;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import liuliu.learning.db.entity.UserInfo;
  * @email: 165348097@qq.com
  * @since JDK 1.8
  */
-public interface UserInfoMapper {
+public interface UserInfoMapperOne {
 	
     List<UserInfo> listAll();
 

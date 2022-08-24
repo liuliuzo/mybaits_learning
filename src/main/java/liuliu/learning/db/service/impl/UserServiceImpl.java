@@ -2,11 +2,11 @@ package liuliu.learning.db.service.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import liuliu.learning.db.dao.UserMapper;
+import liuliu.learning.db.dao.one.UserMapperOne;
+import liuliu.learning.db.dao.two.UserMapperTwo;
 import liuliu.learning.db.entity.User;
 import liuliu.learning.db.service.UserService;
 
@@ -20,16 +20,30 @@ import liuliu.learning.db.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Resource
-	private UserMapper userMapper;
+    @Autowired
+	private UserMapperOne userMapperOne;
 
-	@Override
-	public List<User> listAll() {
-		return userMapper.listAll();
-	}
+    @Autowired
+    private UserMapperTwo userMapperTwo;
 
-	@Override
-	public int insert(User user) {
-		return userMapper.insert(user);
-	}
+    @Override
+    public List<User> listAllOne() {
+        return userMapperOne.listAll();
+    }
+
+    @Override
+    public int insertOne(User user) {
+        return userMapperOne.insert(user);
+    }
+
+    @Override
+    public List<User> listAllTwo() {
+        return userMapperTwo.listAll();
+    }
+
+    @Override
+    public int insertTwo(User user) {
+        return userMapperTwo.insert(user);
+    }
+
 }

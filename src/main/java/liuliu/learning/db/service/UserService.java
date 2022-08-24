@@ -12,7 +12,11 @@ import liuliu.learning.db.entity.User;
  * @since JDK 1.8
  */
 public interface UserService {
-    List<User> listAll();
+    List<User> listAllOne();
 
-    int insert(User user);
+    int insertOne(User user);
+
+    List<User> listAllTwo();
+
+    int insertTwo(User user);
 }

@@ -35,8 +35,9 @@ public class StartApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
+	    //database one	    
 		try {
-			List<UserInfo> listAll = this.userInfoService.listAll();
+			List<UserInfo> listAll = this.userInfoService.listAllOne();
 			listAll.forEach((userInfo) -> log.info(userInfo.toString()));
 		} catch (Exception e) {
 			//MyException myException = (MyException) e.getCause();
@@ -47,7 +48,20 @@ public class StartApplication implements CommandLineRunner {
 		userInfo.setEmail("email@email.com");
 		userInfo.setId(1001);
 		userInfo.setName("name");
-		this.userInfoService.insert(userInfo);
+		this.userInfoService.insertOne(userInfo);
+
+		//database two
+        try {
+            List<UserInfo> listAll2 = this.userInfoService.listAllTwo();
+            listAll2.forEach((userInfo2) -> log.info(userInfo2.toString()));
+        } catch (Exception e) {
+            log.error("try catch Exception", e);
+        }
+        UserInfo userInfo2 = new UserInfo();
+        userInfo2.setEmail("email@email.com");
+        userInfo2.setId(1001);
+        userInfo2.setName("name");
+        this.userInfoService.insertTwo(userInfo2);
 	}
 
 }
