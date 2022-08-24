@@ -2,7 +2,6 @@ package liuliu.learning;
 
 import java.util.List;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,6 @@ import liuliu.learning.db.service.UserInfoService;
  * @since JDK 1.8
  */
 @SpringBootApplication
-@MapperScan("liuliu.learning.db.dao")
 public class StartApplication implements CommandLineRunner {
 
 	private static final Logger log = LoggerFactory.getLogger(StartApplication.class);

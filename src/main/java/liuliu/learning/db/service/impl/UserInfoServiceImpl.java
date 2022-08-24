@@ -33,19 +33,16 @@ public class UserInfoServiceImpl implements UserInfoService {
 	
     @Override
     public int insertOne(UserInfo userInfo) {
-        // TODO Auto-generated method stub
-        return 0;
+        return userInfoMapperOne.insert(userInfo);
     }
 
     @Override
     public List<UserInfo> listAllTwo() {
-        // TODO Auto-generated method stub
-        return null;
+        return userInfoMapperTwo.listAll();
     }
 
     @Override
     public int insertTwo(UserInfo userInfo) {
-        // TODO Auto-generated method stub
-        return 0;
+        return userInfoMapperTwo.insert(userInfo);
     }
 }

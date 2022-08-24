@@ -11,13 +11,17 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
 import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -26,12 +30,16 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import com.alibaba.druid.pool.DruidDataSource;
+
 /**
  * 
  * @author liuliu
  *
  */
+@org.springframework.context.annotation.Configuration
 @EnableConfigurationProperties(MybatisProperties.class)
+@MapperScan(basePackages = "liuliu.learning.db.dao.two", sqlSessionTemplateRef  = "sqlSessionTemplateTwo")
 public class DataSourceTwoConfig implements InitializingBean {
 
     private final MybatisProperties properties;
@@ -70,8 +78,14 @@ public class DataSourceTwoConfig implements InitializingBean {
     }
 
     @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.druid.two")
+    public DataSource dataSourceTwo() {
+        return DataSourceBuilder.create().type(DruidDataSource.class).build();
+    }
+
+    @Bean
     @ConditionalOnMissingBean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactoryTwo(@Qualifier("dataSourceTwo") DataSource dataSource) throws Exception {
       SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
       factory.setDataSource(dataSource);
       factory.setVfs(SpringBootVFS.class);
@@ -118,7 +132,7 @@ public class DataSourceTwoConfig implements InitializingBean {
     }
 
     @Bean
-    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+    public SqlSessionTemplate sqlSessionTemplateTwo(@Qualifier("sqlSessionFactoryTwo") SqlSessionFactory sqlSessionFactory) {
       ExecutorType executorType = this.properties.getExecutorType();
       if (executorType != null) {
         return new SqlSessionTemplate(sqlSessionFactory, executorType);
